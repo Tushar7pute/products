@@ -1,0 +1,18 @@
+{
+  "name": "loophealth_assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Tushar Satpute",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "generate-schema": "^2.6.0",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.11.18",
+    "request": "^2.88.2"
+  }
+}
