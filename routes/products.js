@@ -103,7 +103,7 @@ router.get('/search' , async(req,res,next)=>{
 
 })
 
-
+// Filters for brand , gender , category
 router.get('/filters' , async(req,res,next)=>{
     
   try{
