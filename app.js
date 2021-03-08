@@ -9,12 +9,10 @@ const url =
 
 const app = express()   // starts the express framework
 
-mongoose.connect(url, {useNewUrlParser:true ,  useUnifiedTopology: true})
+/*mongoose.connect(url, {useNewUrlParser:true ,  useUnifiedTopology: true})
 //.then(()=>{console.log('Mongo Connected')})
-
 const con = mongoose.connection
-
-con.on('open' , function(){console.log('mongoDB connected......')})
+con.on('open' , function(){console.log('mongoDB connected......')})*/
 
 
 // mongo client

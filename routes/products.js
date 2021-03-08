@@ -13,26 +13,8 @@ var input;
 router.get('/' , async(req,res)=>{
     
     try{
-         //const productsIp = await Product.find({})
-         //res.json(productsIp)
-
-        //const cursor = db.collection('Products').find({});
-       // res.json(productsIp)
-
-        /*MongoClient.connect(url, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db("LoopHealth");
-            dbo.collection("Products").findOne({}, function(err, result) {
-              if (err) throw err;
-              console.log(result.productName);
-              db.close();
-            });
-          });*/
-
-
           MongoClient.connect(url, function(err, db) {
             if (err) throw err;
-            //var query = { productName: /Daniel/ };
             var dbo = db.db("LoopHealth");
             dbo.collection("Products").find({}, { projection: { _id: 0,productName: 1} }).toArray(function(err, result) {
               if (err) throw err;
@@ -41,11 +23,7 @@ router.get('/' , async(req,res)=>{
               db.close();
             });
           });
-
-
-
-
-    }
+      }
 
     catch(err){res.send('Error ' + err)}
 
@@ -56,7 +34,6 @@ router.get('/details' , async(req,res)=>{
     try{
           MongoClient.connect(url, function(err, db) {
             if (err) throw err;
-            //var query = { productName: /Daniel/ };
             var dbo = db.db("LoopHealth");
             dbo.collection("Products").find({}, { projection: { _id: 0} }).toArray(function(err, result) {
                 if (err) throw err;
@@ -65,14 +42,8 @@ router.get('/details' , async(req,res)=>{
               db.close();
             });
           });
-
-
-
-
-    }
-
+      }
     catch(err){res.send('Error ' + err)}
-
 })
 
 
@@ -81,11 +52,9 @@ router.get('/search' , async(req,res,next)=>{
     try{
           MongoClient.connect(url, function(err, db) {
             if (err) throw err;
-            //var query = { productName: /Daniel/ };
             var query = req.query.q;
 
             var dbo = db.db("LoopHealth");
-            //dbo.collection("Products").find({}, { projection: { _id: 0} }).toArray(function(err, result) {
             dbo.collection("Products").find({$text:{$search:query}}, { projection: { _id: 0} }).toArray(function(err, result) {
                 if (err) throw err;
               //console.log(result);
@@ -93,14 +62,8 @@ router.get('/search' , async(req,res,next)=>{
               db.close();
             });
           });
-
-
-
-
     }
-
     catch(err){res.send('Error ' + err)}
-
 })
 
 // Filters for brand , gender , category
@@ -109,7 +72,7 @@ router.get('/filters' , async(req,res,next)=>{
   try{
         MongoClient.connect(url, function(err, db) {
           if (err) throw err;
-          //var query = { productName: /Daniel/ };
+
           var brand = req.query.brand;
           var gender = req.query.gender;
           var category = req.query.category;
@@ -132,11 +95,7 @@ router.get('/filters' , async(req,res,next)=>{
             query=category;
           }
 
-
-
-
           var dbo = db.db("LoopHealth");
-          //dbo.collection("Products").find({}, { projection: { _id: 0} }).toArray(function(err, result) {
           dbo.collection("Products").find({$text:{$search:query}}, { projection: { _id: 0} }).toArray(function(err, result) {
               if (err) throw err;
             //console.log(result);
@@ -144,45 +103,13 @@ router.get('/filters' , async(req,res,next)=>{
             db.close();
           });
         });
-
-
-
-
   }
 
   catch(err){res.send('Error ' + err)}
 
 })
 
-/*
-router.get('/:id' , async(req,res)=>{
-    
-    try{
-         const product = await Product.findById(req.params.id)
-         res.json(product)
-    }
 
-    catch(err){res.send('Error ' + err)}
-
-})
-
-/*router.post('/' , async(req,res) =>
-{
-    const alien = new Alien({
-    name: req.body.name,
-    tech: req.body.tech,
-    sub: req.body.sub
-    })
-
-    try{
-        const a1 = await alien.save()
-        res.json(a1)
-    }
-    catch(err){
-        res.send('Error' + err)
-    }
-
-})
 
 /*router.get('./consume' , async(req,res)=>{
     
